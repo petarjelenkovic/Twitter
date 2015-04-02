@@ -1,7 +1,7 @@
 /**
  * Klasa TwitterPoruka 
- * prekopiarana sa sajta jgrass
- * pruza informaciju o korisniku i poruci koju je objavio
+ * prekopiarana sa http://jgrass.fon.bg.ac.rs/wp-content/uploads/2015/03/JUnit-JavaDoc-task1.pdf
+ * sluzi za definisanje korisnika i twitter poruke koju je objavio
  */
 package com.twitter.poruke;
 
