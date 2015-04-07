@@ -39,8 +39,12 @@ public class TwitterPorukaTest {
 	@Test (expected = java.lang.RuntimeException.class)
 	public void testSetKorisnik() {
 		tp.setKorisnik("Pera");
+		
+		assertEquals("Pera",tp.getKorisnik());
+		
 		TwitterPoruka tp1 = new TwitterPoruka();
 		tp1.setKorisnik("");
+		tp1.setKorisnik(null);
 	}
 
 	/**
@@ -49,8 +53,13 @@ public class TwitterPorukaTest {
 	@Test (expected = java.lang.RuntimeException.class)
 	public void testSetPoruka() {
 		tp.setPoruka("Danas je lep dan");
+		
+		assertEquals("Danas je lep dan",tp.getPoruka());
+		
 		TwitterPoruka tp1 = new TwitterPoruka();
 		tp1.setPoruka(null);
+		tp1.setPoruka("The origins of the name Java are not clear.One possibility is that the island was named after the jáwa-wut plant, which was said to be common in the island during that time."); 
+				
 		
 		
 	}
@@ -61,9 +70,9 @@ public class TwitterPorukaTest {
 	@Test
 	public void testToString() {
 		tp.setKorisnik("Zika");
-		tp.setPoruka("");
+		tp.setPoruka("Pozdrav!");
 		
-		assertEquals("KORISNIK:Zika PORUKA:",tp.toString());
+		assertEquals("KORISNIK:Zika PORUKA:Pozdrav!",tp.toString());
 	}
 
 }

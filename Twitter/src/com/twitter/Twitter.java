@@ -14,7 +14,8 @@ public class Twitter {
      */
 	private LinkedList<TwitterPoruka> poruke = new LinkedList<TwitterPoruka>();
     /**
-     * Vraca listu objekata klase TwitterPoruka
+     * 
+     * @return vraca listu objekata klase TwitterPoruka
      */
 	public LinkedList<TwitterPoruka> vratiSvePoruke(){
 
@@ -39,6 +40,7 @@ public class Twitter {
 	 * @param maxBroj dimenzija niza
 	 * @param tag tag koji se trazi
 	 * @return niz objekata koji imaju zadati tag
+	 * @throws java.lang.RuntimeException kada se kao ulazni parametar unese string koji je null ili je prazan
 	 */
     public TwitterPoruka[] vratiPoruke(int maxBroj, String tag) {
 

@@ -41,7 +41,9 @@ public class TwitterTest {
 	@Test 
 	public void testVratiSvePoruke() {
 		tw.unesi("Laza", "Kako ste?");
-		assertEquals("KORISNIK:Laza PORUKA:Kako ste?",tw.vratiSvePoruke().getLast().toString());
+		assertEquals("Laza",tw.vratiSvePoruke().getLast().getKorisnik());
+		assertEquals("Kako ste?",tw.vratiSvePoruke().getLast().getPoruka());
+		
 		
 	}
 
@@ -54,20 +56,44 @@ public class TwitterTest {
 		assertEquals("Pera",tw.vratiSvePoruke().getLast().getKorisnik());
 		assertEquals("Zdravo!",tw.vratiSvePoruke().getLast().getPoruka());
 		tw.unesi(null,null);
+		tw.unesi("", null);
+		tw.unesi(null, "The origins of the name Java are not clear.One possibility is that the island was named after the jáwa-wut plant, which was said to be common in the island during that time.");
+		tw.unesi("", "The origins of the name Java are not clear.One possibility is that the island was named after the jáwa-wut plant, which was said to be common in the island during that time.");
+		tw.unesi("Milos", null);
+		tw.unesi("Milos", "The origins of the name Java are not clear.One possibility is that the island was named after the jáwa-wut plant, which was said to be common in the island during that time.");
+		tw.unesi(null, "Zdravo!");
+		tw.unesi("", "Zdarvo!");
 	}
 
 	/**
 	 * Test method for {@link com.twitter.Twitter#vratiPoruke(int, java.lang.String)}.
 	 */
-	@Test
+	@Test (expected = java.lang.RuntimeException.class)
 	public void testVratiPoruke() {
 		
 		tw.unesi("Pera", "Dobar dan");
 		tw.unesi("Laza", "Dobar sam film gledao");
 		
-		TwitterPoruka[] a=tw.vratiPoruke(2, "Dobar");
-		assertEquals("KORISNIK:Pera PORUKA:Dobar dan",a[0].toString());
+		TwitterPoruka[] a =tw.vratiPoruke(2, "Dobar");
+		TwitterPoruka[] tw1 = new TwitterPoruka[2];
+		TwitterPoruka pok = new TwitterPoruka();
+		TwitterPoruka pok1 = new TwitterPoruka();
+		tw1[0] = pok;
+		tw1[0].setKorisnik("Pera");
+		tw1[0].setPoruka("Dobar dan");
+		tw1[1] = pok1;
+		tw1[1].setKorisnik("Laza");
+		tw1[1].setPoruka("Dobar sam film gledao");
 		
+		assertEquals(tw1[0].getKorisnik(),a[0].getKorisnik());
+		assertEquals(tw1[0].getPoruka(),a[0].getPoruka());
+		assertEquals(tw1[1].getKorisnik(),a[1].getKorisnik());
+		assertEquals(tw1[1].getPoruka(),a[1].getPoruka());
+		
+		TwitterPoruka[] b = tw.vratiPoruke(-3, "Do");
+		assertEquals(100,b.length);
+		tw.vratiPoruke(2, null);
+		tw.vratiPoruke(2, "");
 	}
 
 }
